@@ -17,11 +17,12 @@ login_layout = html.Div(
                     [
                         fac.AntdSpace(
                                     [
-                                        html.H3("Aceberg用户行为分析",style={"color":"#333333","margin":0}),
-                                        html.H4("Design by Aceberg",style={"color":"#333333","margin":0}),
+                                        html.H3("工业互联网可视化平台",style={"color":"#333333","margin":0}),
+                                        html.H4("Design by Python",style={"color":"#333333","margin":0}),
                                     ],
                                     direction="vertical",
-                                    style={"margin": '30px 0 0 20px'},
+                                    align="center",
+                                    style={"margin": '30px auto 0 auto', "width": "100%", "justifyContent": "center"},
                         ),
                         
                         fac.AntdCenter(
@@ -63,7 +64,7 @@ login_layout = html.Div(
                         fac.AntdCenter(
                             [
                                 fac.AntdButton(
-                                    "登陆",
+                                    "登录",
                                     id="login-btn_login",
                                     style={"width": "80%", "marginTop": 32},
                                     type='primary'
