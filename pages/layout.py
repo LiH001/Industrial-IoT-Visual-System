@@ -3,7 +3,6 @@ from dash import html, dcc, Input, Output, callback
 import feffery_antd_components as fac
 from static.routes import routes
 
-
 layout = html.Div(
     [
         dcc.Location(id="url", refresh=False),
@@ -12,17 +11,31 @@ layout = html.Div(
             [
                 fac.AntdCenter(
                     [
-                        fac.AntdImage(
-                            src="../assets/images/logo.png",
-                            style={
-                                "width": 140,
-                                "margin": "12px 0",
-                                "borderRadius": 8,
-                            },
-                            preview=False,
-                        ),
+                        fac.AntdSpace(
+                            [
+                                fac.AntdImage(
+                                    src="../assets/images/logo.png",
+                                    style={
+                                        "width": 35,
+                                        "borderRadius": 8,
+                                    },
+                                    preview=False,
+                                ),
+                                html.Span(
+                                    "工业监控中枢",
+                                    style={
+                                        "color": "#ffffff",
+                                        "fontSize": "18px",
+                                        "fontWeight": "bold",
+                                        "letterSpacing": "2px"
+                                    }
+                                )
+                            ],
+                            align="center",
+                            size="middle"
+                        )
                     ],
-                    style={"backgroundColor": "null"},
+                    style={"height": "60px", "marginTop": "10px", "marginBottom": "10px"},
                 ),
                 fac.AntdMenu(
                     id="layout-menu",
@@ -58,80 +71,101 @@ layout = html.Div(
                             },
                         ),
                         html.Div(
-                        [
-                            fac.AntdButton(
-                                icon=fac.AntdIcon(icon='antd-download'),
-                                id="layout-rightContent-nav-download",
-                            ),
-                            fac.AntdButton(
-                                icon=fac.AntdIcon(icon='antd-full-screen'),
-                                id="layout-rightContent-nav-fullScreen",
-                            ),
-                            fac.AntdDropdown(
-                                fac.AntdAvatar(
-                                    icon="antd-user",
-                                    size="large",
-                                    style={
-                                        "marginRight": 50,
-                                        "width": 32,
-                                        "height": 32,
-                                        "background": "#1f63fb", 
-                                        "cursor": "pointer"
-                                    },
+                            [
+                                # 1. 工业系统运行状态标签
+                                fac.AntdTag(
+                                    content="系统状态: 正常运行",
+                                    color="success",
+                                    style={"fontSize": "14px", "padding": "4px 8px"}
                                 ),
-                                menuItems=[
-                                    {
-                                        "title": fac.AntdSpace(
-                                            [
-                                                fac.AntdAvatar(
-                                                    icon="antd-user",
-                                                    style={
-                                                        "background": "#f7f8f9",
-                                                        "color": "#9ea5b5",
-                                                        "width": 20,
-                                                        "height": 20,
-                                                    },
-                                                ),
-                                                fac.AntdText(
-                                                    [],
-                                                    id="layout-rightContent-nav-dropdown-accountrole"
-                                                ),
-                                            ]
-                                        ),
-                                        "key": "user"
-                                    },
-                                    {
-                                        "title": fac.AntdSpace(
-                                            [
-                                                fac.AntdAvatar(
-                                                    icon="antd-power-off",
-                                                    style={
-                                                        "background": "#f7f8f9",
-                                                        "color": "#9ea5b5",
-                                                        "width": 24,
-                                                        "height": 24,
-                                                    },
-                                                ),
-                                                "logout",
-                                            ]
-                                        ),
-                                        "key": "logout"
-                                    }
-                                ],
-                                trigger="hover",
-                                placement="bottomRight",
-                                id='layout-rightContent-nav-dropdown',
-                            ),
-                        ],
-                        id="layout-rightContent-nav-div",
-                        style={
-                            "display": "flex",
-                            "alignItems": "center",
-                            "gap": 20,
-                        }
+
+                                # 2. 设备报警铃铛（带小红点）
+                                fac.AntdBadge(
+                                    fac.AntdButton(
+                                        icon=fac.AntdIcon(icon='antd-bell', style={"fontSize": "20px"}),
+                                        type='text',
+                                    ),
+                                    count=3,
+                                ),
+
+                                # 3. 保留原有的下载和全屏按钮
+                                fac.AntdButton(
+                                    icon=fac.AntdIcon(icon='antd-download', style={"fontSize": "20px"}),
+                                    type='text',
+                                    id="layout-rightContent-nav-download",
+                                ),
+                                fac.AntdButton(
+                                    icon=fac.AntdIcon(icon='antd-full-screen', style={"fontSize": "20px"}),
+                                    type='text',
+                                    id="layout-rightContent-nav-fullScreen",
+                                ),
+
+                                # 4. 保留原有的头像下拉菜单
+                                fac.AntdDropdown(
+                                    fac.AntdAvatar(
+                                        icon="antd-user",
+                                        size="large",
+                                        style={
+                                            "marginRight": 50,
+                                            "width": 32,
+                                            "height": 32,
+                                            "background": "#1f63fb",
+                                            "cursor": "pointer"
+                                        },
+                                    ),
+                                    menuItems=[
+                                        {
+                                            "title": fac.AntdSpace(
+                                                [
+                                                    fac.AntdAvatar(
+                                                        icon="antd-user",
+                                                        style={
+                                                            "background": "#f7f8f9",
+                                                            "color": "#9ea5b5",
+                                                            "width": 20,
+                                                            "height": 20,
+                                                        },
+                                                    ),
+                                                    fac.AntdText(
+                                                        [],
+                                                        id="layout-rightContent-nav-dropdown-accountrole"
+                                                    ),
+                                                ]
+                                            ),
+                                            "key": "user"
+                                        },
+                                        {
+                                            "title": fac.AntdSpace(
+                                                [
+                                                    fac.AntdAvatar(
+                                                        icon="antd-power-off",
+                                                        style={
+                                                            "background": "#f7f8f9",
+                                                            "color": "#9ea5b5",
+                                                            "width": 24,
+                                                            "height": 24,
+                                                        },
+                                                    ),
+                                                    "logout",
+                                                ]
+                                            ),
+                                            "key": "logout"
+                                        }
+                                    ],
+                                    trigger="hover",
+                                    placement="bottomRight",
+                                    id='layout-rightContent-nav-dropdown',
+                                ),
+                            ],
+                            id="layout-rightContent-nav-div",
+                            style={
+                                "display": "flex",
+                                "alignItems": "center",
+                                "gap": 15,
+                            }
                         ),
-                        
                     ],
+                    # 这里是刚才被不小心删掉的 nav 外层容器的收尾配置
                     id="layout-rightContent-nav",
                     style={
                         "display": "flex",
@@ -144,6 +178,8 @@ layout = html.Div(
                         "lineHeight": "50px",
                     },
                 ),
+
+                # 下面是正常的数据看板内容区域
                 html.Div(
                     [],
                     id="layout-rightContent-content",
@@ -160,7 +196,6 @@ layout = html.Div(
             style={
                 "width": "calc(100vw - 240px)",
                 "height": "100%",
-                # "backgroundColor": "#1f63fb",
             },
         ),
     ],
@@ -171,7 +206,6 @@ layout = html.Div(
         "width": "100vw",
         "height": "100vh",
         "backgroundColor": "#f7f9fa",
-        # "backgroundImage": "url("https://dss3.bdstatic.com/iPoZeXSm1A5BphGlnYG/skin/54.jpg")",
         "overflowY": "hidden",
         "margin": 0,
         "padding": 0,
