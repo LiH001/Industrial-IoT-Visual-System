@@ -1,1 +1,0 @@
-# Industrial-IoT-Visual-System
